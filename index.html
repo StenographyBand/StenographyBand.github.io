@@ -5,134 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StenographyBand</title>
   <style>
-/*ColorScheme:#d11141	(209,17,65)
-#00b159	(0,177,89)
-#00aedb	(0,174,219)
-#f37735	(243,119,53)
-#ffc425*/
-        @font-face {
-          font-family: 'PT Serif Bold';
-          src: url('Fonts/PTSerif-Bold.eot');
-          src: url('Fonts/PTSerif-Bold.eot?#iefix') format('embedded-opentype'),
-               url('Fonts/PTSerif-Bold.woff2') format('woff2'),
-               url('Fonts/PTSerif-Bold.woff') format('woff'),
-               url('Fonts/PTSerif-Bold.ttf') format('truetype'),
-               url('Fonts/PTSerif-Bold.svg#PTSerifbold') format('svg');
-          font-weight: bold;
-        }
-        @font-face {
-          font-family: 'PT Serif Italic';
-          src: url('Fonts/PTSerif-Italic.eot');
-          src: url('Fonts/PTSerif-Italic.eot?#iefix') format('embedded-opentype'),
-               url('Fonts/PTSerif-Italic.woff2') format('woff2'),
-               url('Fonts/PTSerif-Italic.woff') format('woff'),
-               url('Fonts/PTSerif-Italic.ttf') format('truetype'),
-               url('Fonts/PTSerif-Italic.svg#PTSerifitalic') format('svg');
-          font-weight: normal;
-          font-style: italic;
-        }
-        @font-face {
-          font-family: 'PT Serif Regular';
-          src: url('Fonts/PTSerif-Regular.eot');
-          src: url('Fonts/PTSerif-Regular.eot?#iefix') format('embedded-opentype'),
-               url('Fonts/PTSerif-Regular.woff2') format('woff2'),
-               url('Fonts/PTSerif-Regular.woff') format('woff'),
-               url('Fonts/PTSerif-Regular.ttf') format('truetype'),
-               url('Fonts/PTSerif-Regular.svg#PTSerifregular') format('svg');
-          font-weight: normal;
-          font-style: normal;
-        }
-        body {
-            font-family: 'PT Serif Regular', Arial, sans-serif;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .textContainer {
-            margin-top: 0px;
-            max-width: 800px;
-            padding-left: 10px;
-        }
-        .bold-text {
-            font-family: 'PT Serif Bold', Arial, sans-serif;
-            font-weight: bold;
-        }
-        .button {
-            white-space: nowrap;
-            flex: 1;
-            background-color: #00aedb;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .special-button {
-            white-space: nowrap;
-            flex: 1;
-            background-color: #00b159;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .appinstall-button {
-            font-size: 16px;
-            white-space: nowrap;
-            flex: 1;
-            background-color: #f37735; /* This is the color green */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .blue-button-row,
-        .orange-button-row,
-        .green-button-row {
-            display: flex;
-            gap: 10px;
-            flex-basis: 100%;
-        }
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin: 10px;
-            max-width: 800px;
-        }
-        .top-image,
-        .bottom-image {
-            margin-top: 20px;
-            margin-left: 10px;
-            float: left;
-            clear: left;
-        }
+    /*ColorScheme:#d11141	(209,17,65)
+    #00b159	(0,177,89)
+    #00aedb	(0,174,219)
+    #f37735	(243,119,53)
+    #ffc425*/
+    @font-face {
+      font-family: 'PT Serif Bold';
+      src: url('Fonts/PTSerif-Bold.eot');
+      src: url('Fonts/PTSerif-Bold.eot?#iefix') format('embedded-opentype'),
+           url('Fonts/PTSerif-Bold.woff2') format('woff2'),
+           url('Fonts/PTSerif-Bold.woff') format('woff'),
+           url('Fonts/PTSerif-Bold.ttf') format('truetype'),
+           url('Fonts/PTSerif-Bold.svg#PTSerifbold') format('svg');
+      font-weight: bold;
+    }
+    @font-face {
+      font-family: 'PT Serif Italic';
+      src: url('Fonts/PTSerif-Italic.eot');
+      src: url('Fonts/PTSerif-Italic.eot?#iefix') format('embedded-opentype'),
+           url('Fonts/PTSerif-Italic.woff2') format('woff2'),
+           url('Fonts/PTSerif-Italic.woff') format('woff'),
+           url('Fonts/PTSerif-Italic.ttf') format('truetype'),
+           url('Fonts/PTSerif-Italic.svg#PTSerifitalic') format('svg');
+      font-weight: normal;
+      font-style: italic;
+    }
+    @font-face {
+      font-family: 'PT Serif Regular';
+      src: url('Fonts/PTSerif-Regular.eot');
+      src: url('Fonts/PTSerif-Regular.eot?#iefix') format('embedded-opentype'),
+           url('Fonts/PTSerif-Regular.woff2') format('woff2'),
+           url('Fonts/PTSerif-Regular.woff') format('woff'),
+           url('Fonts/PTSerif-Regular.ttf') format('truetype'),
+           url('Fonts/PTSerif-Regular.svg#PTSerifregular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+    body {
+      font-family: 'PT Serif Regular', Arial, sans-serif;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      background-image: url('Purple.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    .textContainer {
+      margin-top: 0px;
+      max-width: 800px;
+      padding-left: 10px;
+      color: white; /* Setting text color to white for better readability */
+    }
+    .bold-text {
+      font-family: 'PT Serif Bold', Arial, sans-serif;
+      font-weight: bold;
+    }
+    .button {
+      white-space: nowrap;
+      flex: 1;
+      background-color: #00aedb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .special-button {
+      white-space: nowrap;
+      flex: 1;
+      background-color: #00b159;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .appinstall-button {
+      font-size: 16px;
+      white-space: nowrap;
+      flex: 1;
+      background-color: #f37735; /* This is the color green */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .blue-button-row,
+    .orange-button-row,
+    .green-button-row {
+      display: flex;
+      gap: 10px;
+      flex-basis: 100%;
+    }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 10px;
+      max-width: 800px;
+    }
+    .top-image {
+      margin-top: 20px;
+      margin-left: 10px;
+      float: left;
+      clear: left;
+    }
     #Chicken {
-  width: 200px; /* Set the maximum width for the image */
-  height: auto;
-  float: Left; /* Float the image to the right */
-}
-    </style>
+      width: 100vw; /* Set the width of the image to fill the screen */
+      height: 100vh; /* Set the height of the image to fill the screen */
+      object-fit: cover; /* Maintain aspect ratio while filling the screen */
+    }
+    .bottom-image {
+      background-image: url('Laugh.jpg'), url('Stare.jpg'), url('Sunset.jpg');
+      background-size: auto;
+      background-repeat: no-repeat;
+      background-position: top left, top center, top right;
+      padding-top: 500px; /* Adjust as needed */
+    }
+  </style>
 </head>
 <body>
-    <div class="top-image">
+  <div class="top-image">
     <img src="Chicken.JPG" alt="Chicken" id="Chicken">  
-    </div>
-    <div class="textContainer">
-        <p><a href="https://soundcloud.com/stenography">SoundCloud Profile</a> | 
-        <a href="https://soundcloud.com/stenography/dolly">Dolly</a> | 
-    </div>
-    <div class="bottom-image">
-    </div>
-    <div class="textContainer">
-      <p>Contact the Stenography: stensgarderik@gmail.com
-      </p>
-    </div>
-    <script>
-    </script>
+  </div>
+  <div class="textContainer">
+    <p><a href="https://soundcloud.com/stenography">SoundCloud Profile</a> | 
+    <a href="https://soundcloud.com/stenography/dolly">Dolly</a> | </p>
+  </div>
+  <div class="bottom-image">
+    <!-- This div is for additional background images -->
+  </div>
+  <div class="textContainer">
+    <p>Contact the Stenography: stensgarderik@gmail.com</p>
+  </div>
+  <script>
+  </script>
 </body>
 </html>
