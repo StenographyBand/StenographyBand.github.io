@@ -67,33 +67,48 @@
     .button {
       white-space: nowrap;
       flex: 1;
-      background-color: #00aedb;
+      background-color: #d11141; /* Red color */
       color: white;
-      padding: 10px 20px;
+      padding: 20px; /* Increased padding for square buttons */
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none; /* Remove underline from links */
+      border-radius: 0; /* Square corners */
+      display: inline-block; /* Make links behave like buttons */
+      width: 75%; /* Take up 75% of the screen */
+    }
+    .button:hover {
+      background-color: #00b159; /* Green color */
     }
     .special-button {
       white-space: nowrap;
       flex: 1;
       background-color: #00b159;
       color: white;
-      padding: 10px 20px;
+      padding: 20px;
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      border-radius: 0;
+      display: inline-block;
+      width: 75%;
     }
     .appinstall-button {
       font-size: 16px;
       white-space: nowrap;
       flex: 1;
-      background-color: #f37735; /* This is the color green */
+      background-color: #f37735; /* Orange color */
       color: white;
-      padding: 10px 20px;
+      padding: 20px;
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      border-radius: 0;
+      display: inline-block;
+      width: 75%;
     }
     .blue-button-row,
     .orange-button-row,
@@ -143,16 +158,24 @@
       background-position: top left, top center, top right;
       padding-top: 50px; /* Adjust as needed */
     }
+    #title {
+      font-size: 36px; /* Increase font size */
+      margin-left: 20px;
+      margin-top: 20px;
+      color: white; /* Change text color to white */
+    }
   </style>
 </head>
 <body>
-  <p>Stenography</p>
+  <h1 id="title">Stenography</h1>
   <div class="top-image">
     <img src="Chicken.JPG" alt="Chicken" id="Chicken">  
   </div>
   <div class="textContainer">
-    <p><a href="https://soundcloud.com/stenography">SoundCloud Profile</a>
-    <a href="https://soundcloud.com/stenography/dolly">Dolly</a> </p>
+    <p><a href="https://soundcloud.com/stenography" class="button">Listen on SoundCloud</a>
+    <a href="https://www.instagram.com/stenographyband?igsh=MXJtNXFqcTIya2dzMg==" class="button">
+
+Instagram</a> </p>
   </div>
   <div class="bottom-image">
     <img src="Laugh.JPG" alt="Laugh" id="Laugh">  
@@ -163,7 +186,5 @@
     <p>Contact the Stenography: stensgarderik@gmail.com</p>
     <p>Picture Credit: Kathryn Stensgard</p>
   </div>
-  <script>
-  </script>
 </body>
 </html>
