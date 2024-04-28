@@ -1,3 +1,6 @@
+Here's the updated HTML with the requested changes:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,39 +70,48 @@
     .button {
       white-space: nowrap;
       flex: 1;
-      background-color: #00aedb;
+      background-color: #d11141; /* Red color */
       color: white;
-      padding: 10px 20px;
+      padding: 20px; /* Increased padding for square buttons */
       border: none;
       cursor: pointer;
       text-align: center;
       text-decoration: none; /* Remove underline from links */
-      border-radius: 5px; /* Rounded corners */
+      border-radius: 0; /* Square corners */
       display: inline-block; /* Make links behave like buttons */
+      width: 75%; /* Take up 75% of the screen */
     }
     .button:hover {
-      background-color: #00b159; /* Change color on hover */
+      background-color: #00b159; /* Green color */
     }
     .special-button {
       white-space: nowrap;
       flex: 1;
       background-color: #00b159;
       color: white;
-      padding: 10px 20px;
+      padding: 20px;
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      border-radius: 0;
+      display: inline-block;
+      width: 75%;
     }
     .appinstall-button {
       font-size: 16px;
       white-space: nowrap;
       flex: 1;
-      background-color: #f37735; /* This is the color green */
+      background-color: #f37735; /* Orange color */
       color: white;
-      padding: 10px 20px;
+      padding: 20px;
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none;
+      border-radius: 0;
+      display: inline-block;
+      width: 75%;
     }
     .blue-button-row,
     .orange-button-row,
@@ -150,9 +162,10 @@
       padding-top: 50px; /* Adjust as needed */
     }
     #title {
-      font-size: 24px;
+      font-size: 36px; /* Increase font size */
       margin-left: 20px;
       margin-top: 20px;
+      color: white; /* Change text color to white */
     }
   </style>
 </head>
@@ -162,8 +175,8 @@
     <img src="Chicken.JPG" alt="Chicken" id="Chicken">  
   </div>
   <div class="textContainer">
-    <p><a href="https://soundcloud.com/stenography" class="button">SoundCloud Profile</a>
-    <a href="https://soundcloud.com/stenography/dolly" class="button">Dolly</a> </p>
+    <p><a href="https://soundcloud.com/stenography" class="button">Listen on SoundCloud</a>
+    <a href="https://www.instagram.com/stenographyband?igsh=MXJtNXFqcTIya2dzMg==" class="button">
   </div>
   <div class="bottom-image">
     <img src="Laugh.JPG" alt="Laugh" id="Laugh">  
