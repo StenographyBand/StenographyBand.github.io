@@ -73,6 +73,12 @@
       border: none;
       cursor: pointer;
       text-align: center;
+      text-decoration: none; /* Remove underline from links */
+      border-radius: 5px; /* Rounded corners */
+      display: inline-block; /* Make links behave like buttons */
+    }
+    .button:hover {
+      background-color: #00b159; /* Change color on hover */
     }
     .special-button {
       white-space: nowrap;
@@ -143,16 +149,21 @@
       background-position: top left, top center, top right;
       padding-top: 50px; /* Adjust as needed */
     }
+    #title {
+      font-size: 24px;
+      margin-left: 20px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <p>Stenography</p>
+  <h1 id="title">Stenography</h1>
   <div class="top-image">
     <img src="Chicken.JPG" alt="Chicken" id="Chicken">  
   </div>
   <div class="textContainer">
-    <p><a href="https://soundcloud.com/stenography">SoundCloud Profile</a>
-    <a href="https://soundcloud.com/stenography/dolly">Dolly</a> </p>
+    <p><a href="https://soundcloud.com/stenography" class="button">SoundCloud Profile</a>
+    <a href="https://soundcloud.com/stenography/dolly" class="button">Dolly</a> </p>
   </div>
   <div class="bottom-image">
     <img src="Laugh.JPG" alt="Laugh" id="Laugh">  
@@ -160,7 +171,7 @@
     <img src="Sunset.JPG" alt="Sunset" id="Sunset">
   </div>
   <div class="textContainer">
-    <p>Contact the Stenography: stensgarderik@gmail.com</p>
+    <p>Contact Stenography: stensgarderik@gmail.com (Email) StenographyBand (Instagram)</p>
     <p>Picture Credit: Kathryn Stensgard</p>
   </div>
   <script>
