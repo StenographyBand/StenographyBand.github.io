@@ -1,0 +1,18 @@
+{
+  "name": "Best Med Guide",
+  "short_name": "BMG",
+  "description": "Best Med Guide App",
+  "scope": "/",
+  "start_url": "/index.html",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "standalone", 
+  "icons": [
+      {
+        "src": "bestMedGuide.png",
+        "sizes": "1024x1024",
+        "type": "image/png",
+        "purpose": "any"
+      }
+  ]
+}
