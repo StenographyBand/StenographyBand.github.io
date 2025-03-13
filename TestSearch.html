@@ -3,12 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Bar Example</title>
+    <title>Best Med Guide</title>
+    <link rel="canonical" href="https://bestmedguide.com">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="bestMedGuideIcon.png" type="image/x-icon">
     <style>
+        /*ColorScheme:#d11141	(209,17,65)
+        #00b159	(0,177,89)
+        #00aedb	(0,174,219)
+        #f37735	(243,119,53)
+        #ffc425*/
+        @font-face {
+            font-family: 'PT Serif Bold';
+            src: url('Fonts/PTSerif-Bold.eot');
+            src: url('Fonts/PTSerif-Bold.eot?#iefix') format('embedded-opentype'),
+                url('Fonts/PTSerif-Bold.woff2') format('woff2'),
+                url('Fonts/PTSerif-Bold.woff') format('woff'),
+                url('Fonts/PTSerif-Bold.ttf') format('truetype'),
+                url('Fonts/PTSerif-Bold.svg#PTSerifbold') format('svg');
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: 'PT Serif Italic';
+            src: url('Fonts/PTSerif-Italic.eot');
+            src: url('Fonts/PTSerif-Italic.eot?#iefix') format('embedded-opentype'),
+                url('Fonts/PTSerif-Italic.woff2') format('woff2'),
+                url('Fonts/PTSerif-Italic.woff') format('woff'),
+                url('Fonts/PTSerif-Italic.ttf') format('truetype'),
+                url('Fonts/PTSerif-Italic.svg#PTSerifitalic') format('svg');
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: 'PT Serif Regular';
+            src: url('Fonts/PTSerif-Regular.eot');
+            src: url('Fonts/PTSerif-Regular.eot?#iefix') format('embedded-opentype'),
+                url('Fonts/PTSerif-Regular.woff2') format('woff2'),
+                url('Fonts/PTSerif-Regular.woff') format('woff'),
+                url('Fonts/PTSerif-Regular.ttf') format('truetype'),
+                url('Fonts/PTSerif-Regular.svg#PTSerifregular') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'PT Serif Regular', Arial, sans-serif;
+            font-size: 16px;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bold-text {
+            font-family: 'PT Serif Bold', Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .button {
+            white-space: nowrap;
+            flex: 1;
+            background-color: #00aedb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .appinstall-button {
+            font-size: 16px;
+            white-space: nowrap;
+            flex: 1;
+            background-color: #f37735; /* This is the color green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .textContainer {
+            margin-top: 0px;
+            max-width: 800px;
+            padding-left: 10px;
         }
 
         .search-container {
@@ -31,7 +111,8 @@
 
         .dropdown {
             position: absolute;
-            top: 40px;
+            top: 100%;
+            left: 0;
             width: 100%;
             border: 1px solid #ccc;
             border-top: none;
@@ -39,6 +120,7 @@
             z-index: 10;
             max-height: 200px;
             overflow-y: auto;
+            display: none; /* Initially hidden */
         }
 
         .dropdown-item {
@@ -57,63 +139,89 @@
     </style>
 </head>
 <body>
+    <div class="top-image">
+        <img src="Resources/bestMedGuideHeader.png" alt="bestMedGuide" id="bestMedGuide">  
+    </div>
 
-<div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search by name..." oninput="searchData()" />
-    <div class="dropdown" id="dropdown"></div>
-</div>
+    <div class="textContainer">
+        <h1 id="title">Best Med Guide</h1>
+    </div>
 
-<script>
-    // Global variable to store JSON data
-    let data = [];
+    <div class="textContainer">
+        <p>Best Med Guide is a comprehensive online resource for medical and pharmaceutical information. It is currently under development by Dr. Erik Stensgard.</p>
+    </div>
 
-    // Fetch the JSON data from the external file
-    fetch('Resources/resourceLinks.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            data = jsonData;
-        })
-        .catch(error => {
-            console.error('Error loading the JSON data:', error);
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search topic by name..." oninput="searchData()" />
+        <div class="dropdown" id="dropdown"></div>
+    </div>
+
+    <div class="bottom-image">
+        <img src="Resources/profilePic.jpg" alt="profilePic" id="profilePic">   
+    </div>
+
+    <div class="button-container">
+        <a style="text-decoration:none" class="button" href="Resources/stensgardCV.pdf">Download Dr. Stensgard's CV</a>
+    </div>  
+
+    <div class="textContainer">
+        <p>Contact Dr. Erik Stensgard: stensgarderik@gmail.com</p>
+    </div>
+
+    <script>
+        // Global variable to store JSON data
+        let data = [];
+
+        // Fetch the JSON data from the external file
+        fetch('Resources/resourceLinks.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData;
+            })
+            .catch(error => {
+                console.error('Error loading the JSON data:', error);
+            });
+
+        const searchInput = document.getElementById('searchInput');
+        const dropdown = document.getElementById('dropdown');
+
+        function searchData() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                dropdown.innerHTML = '';
+                dropdown.style.display = 'none';  // Hide the dropdown if no query
+                return;
+            }
+
+            // Filter the data based on the search query
+            const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
+
+            // Sort the results by the closest match
+            filteredData.sort((a, b) => {
+                const aMatch = a.Name.toLowerCase().indexOf(query);
+                const bMatch = b.Name.toLowerCase().indexOf(query);
+                return aMatch - bMatch; // Ascending order of match
+            });
+
+            // Show the dropdown items
+            if (filteredData.length > 0) {
+                dropdown.innerHTML = filteredData.map(item => 
+                    `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
+                ).join('');
+                dropdown.style.display = 'block';  // Show the dropdown if results exist
+            } else {
+                dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
+                dropdown.style.display = 'block';  // Show the dropdown with no results
+            }
+        }
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.search-container')) {
+                dropdown.innerHTML = '';
+                dropdown.style.display = 'none';  // Hide dropdown if clicked outside
+            }
         });
-
-    const searchInput = document.getElementById('searchInput');
-    const dropdown = document.getElementById('dropdown');
-
-    function searchData() {
-        const query = searchInput.value.toLowerCase().trim();
-        if (!query) {
-            dropdown.innerHTML = '';
-            return;
-        }
-
-        // Filter the data based on the search query
-        const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
-
-        // Sort the results by the closest match
-        filteredData.sort((a, b) => {
-            const aMatch = a.Name.toLowerCase().indexOf(query);
-            const bMatch = b.Name.toLowerCase().indexOf(query);
-            return aMatch - bMatch; // Ascending order of match
-        });
-
-        // Show the dropdown items
-        if (filteredData.length > 0) {
-            dropdown.innerHTML = filteredData.map(item => 
-                `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
-            ).join('');
-        } else {
-            dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
-        }
-    }
-
-    // Close dropdown if clicked outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.search-container')) {
-            dropdown.innerHTML = '';
-        }
-    });
-</script>
-
+    </script>
 </body>
 </html>
