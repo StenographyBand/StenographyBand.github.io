@@ -64,11 +64,18 @@
 </div>
 
 <script>
-    const data = [
-        {"Name" : "Adult Immunization Schedule by Age", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"},
-        {"Name" : "Adult Immunization Schedule by Indication", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"},
-        {"Name" : "Drug Label", "URL" : "https://dailymed.nlm.nih.gov/dailymed/"}
-    ];
+    // Global variable to store JSON data
+    let data = [];
+
+    // Fetch the JSON data from the external file
+    fetch('Resources/resourceLinks.json')
+        .then(response => response.json())
+        .then(jsonData => {
+            data = jsonData;
+        })
+        .catch(error => {
+            console.error('Error loading the JSON data:', error);
+        });
 
     const searchInput = document.getElementById('searchInput');
     const dropdown = document.getElementById('dropdown');
