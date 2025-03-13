@@ -1,8 +1,11 @@
 [
-    {"Name" : "Adult Immunization Schedule by Age", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"
-    }
-    {"Name" : "Adult Immunization Schedule by Indication", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"
-    }
-    {"Name" : "Drug Label ", "URL" : "https://dailymed.nlm.nih.gov/dailymed/"
+    {"Name" : "Adult Immunization Schedule by Age", 
+        "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"
+    },
+    {"Name" : "Adult Immunization Schedule by Indication", 
+        "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"
+    },
+    {"Name" : "Drug Label ", 
+        "URL" : "https://dailymed.nlm.nih.gov/dailymed/"
     }
     ]
