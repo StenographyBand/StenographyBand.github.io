@@ -62,10 +62,6 @@
             display: flex;
             flex-direction: column;
         }
-        .textContainer {
-            margin-top: 0px;
-            max-width: 800px;
-            padding-left: 10px;
         }
         .bold-text {
             font-family: 'PT Serif Bold', Arial, sans-serif;
@@ -75,16 +71,6 @@
             white-space: nowrap;
             flex: 1;
             background-color: #00aedb;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-        }
-        .special-button {
-            white-space: nowrap;
-            flex: 1;
-            background-color: #00b159;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -101,6 +87,18 @@
             border: none;
             cursor: pointer;
             text-align: center;
+        }
+         .textContainer {
+            margin-top: 0px;
+            max-width: 800px;
+            padding-left: 10px;
+            .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .button-container {
             display: flex;
@@ -122,11 +120,44 @@
             height: auto;
             float: left; /* Float the image to the right */
         }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .dropdown {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown-item:active {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
     <div class="top-image">
-        <img src="bestMedGuideHeader.png" alt="bestMedGuide" id="bestMedGuide">  
+        <img src="Resources/bestMedGuideHeader.png" alt="bestMedGuide" id="bestMedGuide">  
     </div>
     <div class="textContainer">
       <h1 id="title">Best Med Guide</h1>
@@ -134,18 +165,72 @@
     <div class="textContainer">
          <p>Best Med Guide is a comprehensive online resource for medical and pharmaceutical infromation. It is currently under development by Dr. Erik Stensgard.</p>
     </div>
- 
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search topic by name..." oninput="searchData()" />
+        <div class="dropdown" id="dropdown"></div>
+    </div>
     <div class="bottom-image">
-      <img src="profilePic.jpg" alt="profilePic" id="profilePic">   
+      <img src="Resources/profilePic.jpg" alt="profilePic" id="profilePic">   
     </div>
     <div class="button-container">
-        <a style="text-decoration:none" class="button" href="stensgardCV.pdf">Download Dr. Stensgard's CV</a>
+        <a style="text-decoration:none" class="button" href="Resources/stensgardCV.pdf">Download Dr. Stensgard's CV</a>
     </div>  
     <div class="textContainer">
         <p>Contact Dr. Erik Stensgard: stensgarderik@gmail.com</p>
     </div>
- <!--    <script>
-        // Your existing PWA registration code
+    <script>
+
+     // Global variable to store JSON data
+    let data = [];
+
+    // Fetch the JSON data from the external file
+    fetch('Resources/resourceLinks.json')
+        .then(response => response.json())
+        .then(jsonData => {
+            data = jsonData;
+        })
+        .catch(error => {
+            console.error('Error loading the JSON data:', error);
+        });
+
+    const searchInput = document.getElementById('searchInput');
+    const dropdown = document.getElementById('dropdown');
+
+    function searchData() {
+        const query = searchInput.value.toLowerCase().trim();
+        if (!query) {
+            dropdown.innerHTML = '';
+            return;
+        }
+
+        // Filter the data based on the search query
+        const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
+
+        // Sort the results by the closest match
+        filteredData.sort((a, b) => {
+            const aMatch = a.Name.toLowerCase().indexOf(query);
+            const bMatch = b.Name.toLowerCase().indexOf(query);
+            return aMatch - bMatch; // Ascending order of match
+        });
+
+        // Show the dropdown items
+        if (filteredData.length > 0) {
+            dropdown.innerHTML = filteredData.map(item => 
+                `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
+            ).join('');
+        } else {
+            dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
+        }
+    }
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.search-container')) {
+            dropdown.innerHTML = '';
+        }
+    });
+</script>
+       <!--// Your existing PWA registration code
 
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('/service-worker.js', {
