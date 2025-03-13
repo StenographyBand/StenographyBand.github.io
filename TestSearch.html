@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 40px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            z-index: 10;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown-item:active {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search by name..." oninput="searchData()" />
+    <div class="dropdown" id="dropdown"></div>
+</div>
+
+<script>
+    const data = [
+        {"Name" : "Adult Immunization Schedule by Age", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"},
+        {"Name" : "Adult Immunization Schedule by Indication", "URL" : "https://www.cdc.gov/vaccines/hcp/imz-schedules/downloads/adult/adult-combined-schedule.pdf"},
+        {"Name" : "Drug Label", "URL" : "https://dailymed.nlm.nih.gov/dailymed/"}
+    ];
+
+    const searchInput = document.getElementById('searchInput');
+    const dropdown = document.getElementById('dropdown');
+
+    function searchData() {
+        const query = searchInput.value.toLowerCase().trim();
+        if (!query) {
+            dropdown.innerHTML = '';
+            return;
+        }
+
+        // Filter the data based on the search query
+        const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
+
+        // Sort the results by the closest match
+        filteredData.sort((a, b) => {
+            const aMatch = a.Name.toLowerCase().indexOf(query);
+            const bMatch = b.Name.toLowerCase().indexOf(query);
+            return aMatch - bMatch; // Ascending order of match
+        });
+
+        // Show the dropdown items
+        if (filteredData.length > 0) {
+            dropdown.innerHTML = filteredData.map(item => 
+                `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
+            ).join('');
+        } else {
+            dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
+        }
+    }
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.search-container')) {
+            dropdown.innerHTML = '';
+        }
+    });
+</script>
+
+</body>
+</html>
