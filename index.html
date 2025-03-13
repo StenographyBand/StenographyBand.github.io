@@ -105,7 +105,7 @@
             flex-direction: column;
             gap: 5px;
             margin: 10px;
-            max-width: 800px;
+            max-width: 400px;
         }
         .top-image,
         .bottom-image {
@@ -116,9 +116,9 @@
         }
         #bestMedGuide, #profilePic {
             width:100%;
-            max-width: 300px; /* Set the maximum width for the image */
+            max-width: 400px;
             height: auto;
-            float: left; /* Float the image to the right */
+            float: left;
         }
         input[type="text"] {
             width: 100%;
@@ -130,7 +130,8 @@
         }
         .dropdown {
             position: absolute;
-            top: 40px;
+            top: 100%;
+            left: 0;
             width: 100%;
             border: 1px solid #ccc;
             border-top: none;
@@ -138,18 +139,16 @@
             z-index: 10;
             max-height: 200px;
             overflow-y: auto;
+            display: none; /* Initially hidden */
         }
-
         .dropdown-item {
             padding: 10px;
             cursor: pointer;
             border-bottom: 1px solid #eee;
         }
-
         .dropdown-item:hover {
             background-color: #f0f0f0;
         }
-
         .dropdown-item:active {
             background-color: #ddd;
         }
