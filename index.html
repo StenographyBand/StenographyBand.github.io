@@ -177,57 +177,60 @@
     <div class="textContainer">
         <p>Contact Dr. Erik Stensgard: stensgarderik@gmail.com</p>
     </div>
-    <script>
+<script>
+        // Global variable to store JSON data
+        let data = [];
 
-     // Global variable to store JSON data
-    let data = [];
+        // Fetch the JSON data from the external file
+        fetch('Resources/resourceLinks.json')
+            .then(response => response.json())
+            .then(jsonData => {
+                data = jsonData;
+            })
+            .catch(error => {
+                console.error('Error loading the JSON data:', error);
+            });
 
-    // Fetch the JSON data from the external file
-    fetch('Resources/resourceLinks.json')
-        .then(response => response.json())
-        .then(jsonData => {
-            data = jsonData;
-        })
-        .catch(error => {
-            console.error('Error loading the JSON data:', error);
+        const searchInput = document.getElementById('searchInput');
+        const dropdown = document.getElementById('dropdown');
+
+        function searchData() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (!query) {
+                dropdown.innerHTML = '';
+                dropdown.style.display = 'none';  // Hide the dropdown if no query
+                return;
+            }
+
+            // Filter the data based on the search query
+            const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
+
+            // Sort the results by the closest match
+            filteredData.sort((a, b) => {
+                const aMatch = a.Name.toLowerCase().indexOf(query);
+                const bMatch = b.Name.toLowerCase().indexOf(query);
+                return aMatch - bMatch; // Ascending order of match
+            });
+
+            // Show the dropdown items
+            if (filteredData.length > 0) {
+                dropdown.innerHTML = filteredData.map(item => 
+                    `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
+                ).join('');
+                dropdown.style.display = 'block';  // Show the dropdown if results exist
+            } else {
+                dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
+                dropdown.style.display = 'block';  // Show the dropdown with no results
+            }
+        }
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.search-container')) {
+                dropdown.innerHTML = '';
+                dropdown.style.display = 'none';  // Hide dropdown if clicked outside
+            }
         });
-
-    const searchInput = document.getElementById('searchInput');
-    const dropdown = document.getElementById('dropdown');
-
-    function searchData() {
-        const query = searchInput.value.toLowerCase().trim();
-        if (!query) {
-            dropdown.innerHTML = '';
-            return;
-        }
-
-        // Filter the data based on the search query
-        const filteredData = data.filter(item => item.Name.toLowerCase().includes(query));
-
-        // Sort the results by the closest match
-        filteredData.sort((a, b) => {
-            const aMatch = a.Name.toLowerCase().indexOf(query);
-            const bMatch = b.Name.toLowerCase().indexOf(query);
-            return aMatch - bMatch; // Ascending order of match
-        });
-
-        // Show the dropdown items
-        if (filteredData.length > 0) {
-            dropdown.innerHTML = filteredData.map(item => 
-                `<div class="dropdown-item" onclick="window.location.href='${item.URL}'">${item.Name}</div>`
-            ).join('');
-        } else {
-            dropdown.innerHTML = '<div class="dropdown-item">No results found</div>';
-        }
-    }
-
-    // Close dropdown if clicked outside
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('.search-container')) {
-            dropdown.innerHTML = '';
-        }
-    });
 </script>
        <!--// Your existing PWA registration code
 
